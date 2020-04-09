@@ -7,7 +7,7 @@ const PlaceDetail = ({selectedPlace, closeModal, deletePlace}) => {
     modalContent = (
       <View>
         <Image
-          style={{width: "100%", height: 300}}
+          style={{width: '100%', height: 300}}
           source={selectedPlace.placeImage}
         />
         <Text style={styles.placeName}>{selectedPlace.placeName}</Text>
@@ -15,7 +15,10 @@ const PlaceDetail = ({selectedPlace, closeModal, deletePlace}) => {
     );
   }
   return (
-    <Modal visible={selectedPlace !== null} animationType="slide">
+    <Modal
+      onRequestClose={closeModal} // executes when back btn of android is pressed
+      visible={selectedPlace !== null}
+      animationType="slide">
       <View style={styles.modalContainer}>
         {modalContent}
         <View>
@@ -25,7 +28,7 @@ const PlaceDetail = ({selectedPlace, closeModal, deletePlace}) => {
       </View>
     </Modal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 28,
     textAlign: 'center',
-  }
+  },
 });
 
 export default PlaceDetail;
