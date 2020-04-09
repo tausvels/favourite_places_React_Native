@@ -13,7 +13,7 @@ const PlaceInput = ({userInput, setUserInput, setPlaces, places}) => {
       {
         key: Math.round(Math.random() * 20),
         placeName: userInput,
-        placeImage: placeImg,
+        placeImage: {uri: 'https://picsum.photos/200/300'},
       },
     ]);
     // setPlaces(prevState => [

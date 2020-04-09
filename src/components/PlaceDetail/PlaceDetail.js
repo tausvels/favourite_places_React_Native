@@ -21,10 +21,10 @@ const PlaceDetail = ({selectedPlace, closeModal, deletePlace}) => {
       animationType="slide">
       <View style={styles.modalContainer}>
         {modalContent}
-        <View>
-          <Button title="Delete" color="red" onPress={deletePlace} />
-          <Button title="Close" onPress={closeModal} />
+        <View style={styles.placeBtn}>
+          <Button title="Delete" color="red" onPress={deletePlace} style={styles.placeBtn} />
         </View>
+          <Button title="Close" onPress={closeModal} style={styles.placeBtn} />
       </View>
     </Modal>
   );
@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
     fontSize: 28,
     textAlign: 'center',
   },
+  placeBtn: {
+    paddingBottom: 10,
+  }
 });
 
 export default PlaceDetail;
