@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, View, Image, Button, StyleSheet, Text} from 'react-native';
 
-const PlaceDetail = ({selectedPlace, closeModal}) => {
+const PlaceDetail = ({selectedPlace, closeModal, deletePlace}) => {
   let modalContent = null;
   if (selectedPlace) {
     modalContent = (
@@ -19,7 +19,7 @@ const PlaceDetail = ({selectedPlace, closeModal}) => {
       <View style={styles.modalContainer}>
         {modalContent}
         <View>
-          <Button title="Delete" color="red" />
+          <Button title="Delete" color="red" onPress={deletePlace} />
           <Button title="Close" onPress={closeModal} />
         </View>
       </View>

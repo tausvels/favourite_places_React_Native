@@ -22,15 +22,20 @@ const App = () =>  {
   const selectedPlaceHandler = k => {
     setSelectedPlace(places.find(place => place.key === k));
   };
-  const deletePlace = (k) => {
-    setPlaces((prevState) => prevState.filter((place) => place.key !== k))
+  const deletePlace = () => {
+    setPlaces((prevState) => prevState.filter((place) => place.key !== selectedPlace.key))
+    return setSelectedPlace(null);
   };
   const closeModal = () => setSelectedPlace(null);
 
   return (
     <>
     <View style={styles.container}>
-      <PlaceDetail selectedPlace={selectedPlace} closeModal={closeModal} />
+      <PlaceDetail 
+        selectedPlace={selectedPlace} 
+        closeModal={closeModal} 
+        deletePlace={deletePlace} 
+      />
       <Text style={styles.text}>Enter Place Name</Text>
       <PlaceInput 
         userInput = {userInput} 
