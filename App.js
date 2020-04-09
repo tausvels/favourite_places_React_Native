@@ -12,18 +12,25 @@ import {
 
 import PlaceInput from './src/components/PlaceInput/PlaceInput';
 import PlaceList from './src/components/PlaceList/PlaceList';
+import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
 
 const App = () =>  {
-  const [userInput, setUserInput] = useState({});
+  const [userInput, setUserInput] = useState('');
   const [places, setPlaces] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState(null);
   
+  const selectedPlaceHandler = k => {
+    setSelectedPlace(places.find(place => place.key === k));
+  };
   const deletePlace = (k) => {
     setPlaces((prevState) => prevState.filter((place) => place.key !== k))
   };
+  const closeModal = () => setSelectedPlace(null);
 
   return (
     <>
     <View style={styles.container}>
+      <PlaceDetail selectedPlace={selectedPlace} closeModal={closeModal} />
       <Text style={styles.text}>Enter Place Name</Text>
       <PlaceInput 
         userInput = {userInput} 
@@ -31,7 +38,7 @@ const App = () =>  {
         setPlaces = {setPlaces}
         places = {places} 
       />
-      <PlaceList places = {places} deletePlace = {deletePlace} />
+      <PlaceList places = {places} deletePlace = {deletePlace} selectedPlaceHandler={selectedPlaceHandler} />
     </View>
     </>
   );
@@ -47,5 +54,6 @@ const styles = StyleSheet.create({
     padding: 10
   },   
 });
+
 
 export default App;
