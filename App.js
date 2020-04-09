@@ -15,35 +15,35 @@ import PlaceList from './src/components/PlaceList/PlaceList';
 import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
 
 const App = () =>  {
-  const [userInput, setUserInput] = useState('');
-  const [places, setPlaces] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState(null);
   
   const selectedPlaceHandler = k => {
-    setSelectedPlace(places.find(place => place.key === k));
+    setState((prevState) => ({...prevState, selectedPlace: prevState.places.find(place => place.key === k)}));
   };
   const deletePlace = () => {
-    setPlaces((prevState) => prevState.filter((place) => place.key !== selectedPlace.key))
-    return setSelectedPlace(null);
-  };
-  const closeModal = () => setSelectedPlace(null);
+    setState( prevState => ({
+      ...prevState,
+      places: state.places.filter(place => place.key !== state.selectedPlace.key),
+      selectedPlace: null,
+    }));
+  }
+  const closeModal = () => setState(prevState => ({...prevState, selectedPlace: null}));
+  const [state, setState] = useState({
+    userInput: '',
+    places: [],
+    selectedPlace: null,
+  });
 
   return (
     <>
     <View style={styles.container}>
       <PlaceDetail 
-        selectedPlace={selectedPlace} 
+        state={state} 
         closeModal={closeModal} 
         deletePlace={deletePlace} 
       />
       <Text style={styles.text}>Enter Place Name</Text>
-      <PlaceInput 
-        userInput = {userInput} 
-        setUserInput = {setUserInput}
-        setPlaces = {setPlaces}
-        places = {places} 
-      />
-      <PlaceList places = {places} deletePlace = {deletePlace} selectedPlaceHandler={selectedPlaceHandler} />
+      <PlaceInput state = {state} setState = {setState} />
+      <PlaceList state = {state} selectedPlaceHandler={selectedPlaceHandler} />
     </View>
     </>
   );

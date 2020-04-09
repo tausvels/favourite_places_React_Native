@@ -1,8 +1,9 @@
 import React from 'react';
 import {Modal, View, Image, Button, StyleSheet, Text} from 'react-native';
 
-const PlaceDetail = ({selectedPlace, closeModal, deletePlace}) => {
+const PlaceDetail = ({state, closeModal, deletePlace}) => {
   let modalContent = null;
+  let selectedPlace = state.selectedPlace;
   if (selectedPlace) {
     modalContent = (
       <View>

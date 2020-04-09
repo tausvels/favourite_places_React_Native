@@ -3,31 +3,36 @@ import {View, TextInput, Button, StyleSheet} from 'react-native';
 
 import placeImg from '../../assets/beach.jpg';
 
-const PlaceInput = ({userInput, setUserInput, setPlaces, places}) => {
+const PlaceInput = ({state, setState}) => {
+  let userInput = state.userInput;
+  let places = state.places;
+
   const savePlace = () => {
     if (!userInput) {
       return;
     }
-    setPlaces(() => [
-      ...places,
-      {
-        key: Math.round(Math.random() * 20),
-        placeName: userInput,
-        placeImage: {uri: 'https://picsum.photos/200/300'},
-      },
-    ]);
-    // setPlaces(prevState => [
-    //   ...prevState,
-    //   {key: Math.random(), placeName: userInput},
-    // ]);
+    setState(prevState => ({
+      ...prevState,
+      places: [
+        ...places,
+        {
+          key: Math.round(Math.random() * 20),
+          placeName: userInput,
+          placeImage: {uri: 'https://picsum.photos/200/300'},
+        },
+      ],
+    }));
   };
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.textInput}
         value={userInput}
         placeholder="Place Name"
-        onChangeText={e => setUserInput(e)}
+        onChangeText={e =>
+          setState(prevState => ({...prevState, userInput: e}))
+        }
       />
       <Button title="Save" style={{width: '30%'}} onPress={savePlace} />
     </View>

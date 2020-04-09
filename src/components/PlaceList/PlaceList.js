@@ -3,10 +3,11 @@ import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import ListItem from '../ListItem/ListItem';
 
-const PlaceList = ({places, selectedPlaceHandler}) => {
+const PlaceList = ({state, selectedPlaceHandler}) => {
   // const placesOutput = places.map((place, i) => (
   //   <ListItem key={i} place={place} onPress={() => deletePlace(i)} />
   // ));
+  let places = state.places;
   return (
     <FlatList
       style = {styles.listContainer}
