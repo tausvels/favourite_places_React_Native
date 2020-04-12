@@ -6,7 +6,6 @@ import {
   DESELECT_PLACE,
 } from '../actions/acionTypes';
 
-const uuid = require('react-native-uuid');
 const initialState = {
   places: [],
   selectedPlace: null,
@@ -15,19 +14,24 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLACE:
-      return {
-        ...state,
-        places: [
-          ...state.places,
-          {
-            key: uuid.v4(), // Math.round(Math.random() * 20)
-            placeName: action.placeName,
-            placeImage: {uri: 'https://picsum.photos/200/300'},
-          },
-        ],
-      };
+      if (!action.placeName) {
+        alert('Enter Place Name');
+        return state;
+      } else {
+        return {
+          ...state,
+          places: [
+            ...state.places,
+            {
+              key: Math.round(Math.random() * 20),
+              placeName: action.placeName,
+              placeImage: {uri: 'https://picsum.photos/200/300'},
+            },
+          ],
+        };
+      }
 
-    case DESELECT_PLACE:
+    case DELETE_PLACE:
       return {
         ...state,
         places: state.places.filter(

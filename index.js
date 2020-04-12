@@ -11,9 +11,11 @@ import {name as appName} from './app.json';
 const store = configureStore(); // contains all the states of the application
 
 const ReactNativeRedux = () => {
-  <Provider store={store}>
-    <App />
-  </Provider>;
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 };
 
 AppRegistry.registerComponent(appName, () => ReactNativeRedux);
