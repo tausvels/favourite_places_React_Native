@@ -1,5 +1,14 @@
 import React from 'react';
-import {Modal, View, Image, Button, StyleSheet, Text} from 'react-native';
+import {
+  Modal,
+  View,
+  Image,
+  Button,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const PlaceDetail = ({selectedPlace, closeModal, deletePlace}) => {
   let modalContent = null;
@@ -21,10 +30,12 @@ const PlaceDetail = ({selectedPlace, closeModal, deletePlace}) => {
       animationType="slide">
       <View style={styles.modalContainer}>
         {modalContent}
-        <View style={styles.placeBtn}>
-          <Button title="Delete" color="red" onPress={deletePlace} style={styles.placeBtn} />
-        </View>
-          <Button title="Close" onPress={closeModal} style={styles.placeBtn} />
+        <TouchableOpacity onPress={deletePlace}>
+          <View style={styles.placeBtn}>
+            <Icon size={30} name="ios-trash" color="red" />
+          </View>
+        </TouchableOpacity>
+        <Button title="Close" onPress={closeModal} style={styles.placeBtn} />
       </View>
     </Modal>
   );
@@ -45,7 +56,8 @@ const styles = StyleSheet.create({
   },
   placeBtn: {
     paddingBottom: 10,
-  }
+    alignItems: 'center',
+  },
 });
 
 export default PlaceDetail;
