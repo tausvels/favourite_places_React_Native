@@ -12,7 +12,9 @@
   "dependencies": {
     "react": "16.11.0",
     "react-native": "0.62.1",
-    "react-native-uuid": "^1.4.9"
+    "react-native-uuid": "^1.4.9",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
